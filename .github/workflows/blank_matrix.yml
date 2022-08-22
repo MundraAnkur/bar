@@ -1,0 +1,17 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI_Matrix_Strategy
+
+# Controls when the workflow will run
+on:
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  call-workflow-in-another-repo:
+    strategy:
+      matrix:
+        target: [Ankur, Mike, Harvey]
+    uses: MundraAnkur/foo/.github/workflows/blank.yml@main
+    with:
+      username: ${{ matrix.target }}
