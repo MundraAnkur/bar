@@ -16,7 +16,8 @@ install-tackle:
 	mkdir -p $(dir $(INSTALL_TACKLE)) ;\
 	curl -sSLo $(INSTALL_TACKLE) https://raw.githubusercontent.com/konveyor/tackle2-operator/main/hack/install-tackle.sh ;\
 	chmod +x $(INSTALL_TACKLE) ;\
-	export TACKLE_UI_IMAGE="quay.io/konveyor/tackle2-ui:v2.1.0"; $(INSTALL_TACKLE);
+	export TACKLE_UI_IMAGE="quay.io/konveyor/tackle2-ui:v2.1.0"; \
+	$(INSTALL_TACKLE);
 	
 test-e2e: start-minikube install-tackle; \
 	chmod +x ./hack/test-e2e.sh; \
