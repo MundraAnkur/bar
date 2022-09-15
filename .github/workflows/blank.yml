@@ -13,3 +13,9 @@ jobs:
     uses: MundraAnkur/foo/.github/workflows/blank.yml@main
     with:
       username: Ankur
+  run-make:
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        make start-minikube
+        minikube ip
