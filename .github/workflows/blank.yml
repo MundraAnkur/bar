@@ -19,8 +19,5 @@ jobs:
     - uses: actions/checkout@v3
     - name: Start Minikube
       run: |
-        echo "Ankur"
-        echo $(pwd)
-        make start-minikube
+        make test-e2e
         minikube ip
-        make install-tackle
