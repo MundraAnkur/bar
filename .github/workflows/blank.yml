@@ -17,6 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - run: |
+        echo "Ankur"
+        echo $(pwd)
         make start-minikube
         minikube ip
       working-directory: ${{ github.action_path }}/../../..
