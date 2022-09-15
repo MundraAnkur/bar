@@ -16,7 +16,8 @@ jobs:
   run-make:
     runs-on: ubuntu-latest
     steps:
-    - run: |
+    - name: Start Minikube
+      run: |
         echo "Ankur"
         echo $(pwd)
         make start-minikube
