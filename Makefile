@@ -15,7 +15,7 @@ INSTALL_TACKLE = ./bin/install-tackle.sh
 install-tackle:
 	mkdir -p $(dir $(INSTALL_TACKLE)) ;\
 	curl -sSLo $(INSTALL_TACKLE) https://raw.githubusercontent.com/konveyor/tackle2-operator/main/hack/install-tackle.sh ;\
-	export TACKLE_ADDON_WINDUP_IMAGE=$(IMG)
+	export TACKLE_UI_IMAGE="quay.io/konveyor/tackle2-ui:v2.1.0"
 	chmod +x $(INSTALL_TACKLE) ;\
 	$(INSTALL_TACKLE);
 	
