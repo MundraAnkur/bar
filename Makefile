@@ -2,6 +2,8 @@ GOBIN ?= ${GOPATH}/bin
 IMG   ?= tackle2-addon-windup:latest
 CONTAINER_RUNTIME := $(shell command -v podman 2> /dev/null || echo docker)
 
+build-image:
+	echo "Ankur building image $(IMG)";
 
 .PHONY: test-e2e
 START_MINIKUBE = ./bin/start-minikube.sh
