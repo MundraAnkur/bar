@@ -21,8 +21,8 @@ install-tackle:
 	export TACKLE_UI_IMAGE="quay.io/konveyor/tackle2-ui:v2.1.0"; \
 	$(INSTALL_TACKLE);
 	
-test-e2e: start-minikube install-tackle; \
+test-e2e: start-minikube build-image install-tackle; \
 	export HOST=http://$(shell minikube ip)/hub; \
 	chmod +x hack/test-e2e.sh; \
-	echo $(HOST); \
+	echo "$(HOST)"; \
 	bash hack/test-e2e.sh;
