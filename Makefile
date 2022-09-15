@@ -20,7 +20,7 @@ install-tackle:
 	$(INSTALL_TACKLE);
 	
 test-e2e: start-minikube install-tackle; \
-	minikube_ip := $(shell minikube ip)
+	minikube_ip := $(shell minikube ip); \
 	export HOST=http://$(minikube_ip)/hub; \
 	chmod +x hack/test-e2e.sh; \
 	echo $(HOST); \
