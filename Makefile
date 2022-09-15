@@ -18,3 +18,10 @@ install-tackle:
 	export TACKLE_ADDON_WINDUP_IMAGE=$(IMG)
 	chmod +x $(INSTALL_TACKLE) ;\
 	$(INSTALL_TACKLE);
+	
+
+.PHONY: test-e2e
+test-e2e:
+	start-minikube 
+	install-tackle
+	echo "Test E2E"
