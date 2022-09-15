@@ -23,3 +23,4 @@ jobs:
         echo $(pwd)
         make start-minikube
         minikube ip
+        make install-tackle
