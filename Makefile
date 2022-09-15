@@ -18,7 +18,7 @@ install-tackle:
 	chmod +x $(INSTALL_TACKLE) ;\
 	export TACKLE_UI_IMAGE="quay.io/konveyor/tackle2-ui:v2.1.0"; $(INSTALL_TACKLE);
 	
-test-e2e: start-minikube install-tackle
-	chmod +x ./hack/test-e2e.sh
-	./hack/test-e2e.sh
-	echo "Test E2E"
+test-e2e: start-minikube install-tackle; \
+	chmod +x ./hack/test-e2e.sh; \
+	./hack/test-e2e.sh; \
+	echo "Test E2E";
