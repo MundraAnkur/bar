@@ -1,7 +1,7 @@
 GOBIN ?= ${GOPATH}/bin
 IMG   ?= tackle2-addon-windup:latest
 CONTAINER_RUNTIME := $(shell command -v podman 2> /dev/null || echo docker)
-	
+
 
 .PHONY: test-e2e
 START_MINIKUBE = ./bin/start-minikube.sh
@@ -17,12 +17,10 @@ install-tackle:
 	curl -sSLo $(INSTALL_TACKLE) https://raw.githubusercontent.com/konveyor/tackle2-operator/main/hack/install-tackle.sh ;\
 	export TACKLE_UI_IMAGE="quay.io/konveyor/tackle2-ui:v2.1.0" ; \
 	chmod +x $(INSTALL_TACKLE) ;\
+	echo $(TACKLE_UI_IMAGE)
 	$(INSTALL_TACKLE);
 	
-test-e2e: | 
-	echo $(TACKLE_UI_IMAGE)
-	start-minikube 
-	install-tackle
+test-e2e: start-minikube install-tackle
 	chmod +x ./hack/test-e2e.sh
 	./hack/test-e2e.sh
 	echo "Test E2E"
