@@ -20,6 +20,6 @@ install-tackle:
 	$(INSTALL_TACKLE);
 	
 test-e2e: start-minikube install-tackle; \
-	chmod +x ./hack/test-e2e.sh; \
-	./hack/test-e2e.sh; \
+	chmod +x hack/test-e2e.sh; \
+	bash hack/test-e2e.sh; \
 	echo "Test E2E";
