@@ -28,8 +28,7 @@ ifeq (,$(wildcard $(INSTALL_TACKLE_SH)))
 	chmod +x $(INSTALL_TACKLE_SH) ;\
 	}
 endif
-	export TACKLE_UI_IMAGE="quay.io/konveyor/tackle2-ui:v2.1.0"; \
-	$(INSTALL_TACKLE_SH);
+	export TACKLE_UI_IMAGE="quay.io/konveyor/tackle2-ui:v2.1.0"; $(INSTALL_TACKLE_SH);
 	
 test-e2e: start-minikube build-image install-tackle; \
 	export HOST=http://$(shell minikube ip)/hub; \
