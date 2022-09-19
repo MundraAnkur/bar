@@ -26,9 +26,9 @@ ifeq (,$(wildcard $(INSTALL_TACKLE_SH)))
 	mkdir -p $(dir $(INSTALL_TACKLE_SH)) ;\
 	curl -sSLo $(INSTALL_TACKLE_SH) https://raw.githubusercontent.com/konveyor/tackle2-operator/main/hack/install-tackle.sh ;\
 	chmod +x $(INSTALL_TACKLE_SH) ;\
-	export TACKLE_UI_IMAGE="quay.io/konveyor/tackle2-ui:v2.1.0"; \
 	}
 endif
+	export TACKLE_UI_IMAGE="quay.io/konveyor/tackle2-ui:v2.1.0"; \
 	$(INSTALL_TACKLE_SH);
 	
 test-e2e: start-minikube build-image install-tackle; \
