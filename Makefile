@@ -1,4 +1,4 @@
-GOBIN ?= $(shell go env GOPATH)/bin
+GOBIN ?= ${GOPATH}/bin
 
 controller-gen:
 ifeq (, $(shell which controller-gen))
