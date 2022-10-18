@@ -15,6 +15,7 @@ jobs:
     - uses: actions/checkout@v3
     - uses: actions/setup-go@v3
     - run: export GOPATH=${HOME}/go
+      shell: bash
     - name: echo-default-env-variables
       run: |
           echo "Home: ${HOME}"
