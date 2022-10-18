@@ -17,5 +17,6 @@ endif
 
 generate: controller-gen; \
 	echo "COntroller Gen: $(shell which controller-gen)";\
-	echo "Con: $(CONTROLLER_GEN)"
+	echo "Con: $(CONTROLLER_GEN)"; \
+	echo "Gen: ${CONTROLLER_GEN}";
 	  
