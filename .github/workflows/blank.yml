@@ -16,6 +16,7 @@ jobs:
     - uses: actions/setup-go@v3
     - run: export GOPATH=${HOME}/go
       shell: bash
+    - run: echo "GOPATH $(go env GOPATH)"
     - name: echo-default-env-variables
       run: |
           echo "Home: ${HOME}"
