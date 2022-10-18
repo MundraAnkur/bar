@@ -10,9 +10,9 @@ ifeq (, $(shell which controller-gen))
 	go install sigs.k8s.io/controller-tools/cmd/controller-gen@v0.5.0 ;\
 	rm -rf $$CONTROLLER_GEN_TMP_DIR ;\
 	}
-	CONTROLLER_GEN=$(GOBIN)/controller-gen
+	export CONTROLLER_GEN=$(GOBIN)/controller-gen
 else
-	CONTROLLER_GEN=$(shell which controller-gen)
+	export CONTROLLER_GEN=$(shell which controller-gen)
 endif
 
 generate: controller-gen; \
