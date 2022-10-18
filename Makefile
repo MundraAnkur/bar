@@ -46,6 +46,7 @@ ifeq (, $(shell which controller-gen))
 	go mod init tmp ;\
 	go install sigs.k8s.io/controller-tools/cmd/controller-gen@v0.5.0 ;\
 	rm -rf $$CONTROLLER_GEN_TMP_DIR ;\
+	echo $(shell which controller-gen); \
 	}
 endif
 	export CONTROLLER_GEN=$(shell which controller-gen)
