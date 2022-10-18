@@ -14,11 +14,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-go@v3
-    - run: export GOPATH=${HOME}/go
-      shell: bash
-    - run: echo "GOPATH $(go env GOPATH)"
     - name: echo-default-env-variables
       run: |
+          export GOPATH=$(go env GOPATH)
           echo "Home: ${HOME}"
           echo "GITHUB_WORKFLOW: ${GITHUB_WORKFLOW}"
           echo "GITHUB_ACTIONS: ${GITHUB_ACTIONS}"
@@ -30,5 +28,4 @@ jobs:
           echo "GITHUB_REF: ${GITHUB_REF}"
           echo "GOPATH: ${GOPATH}"
           echo "GITHUB_ACTION_REPOSITORY: ${GITHUB_ACTION_REPOSITORY}"
-    - run: make controller-gen
-    - run: make generate
+          make generate
