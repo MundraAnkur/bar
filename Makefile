@@ -35,3 +35,17 @@ test-e2e: start-minikube build-image install-tackle; \
 	chmod +x hack/test-e2e.sh; \
 	echo "$(HOST)"; \
 	bash hack/test-e2e.sh;
+	
+.PHONY: controller-gen
+controller-gen:
+ifeq (, $(shell which controller-gen))
+	@{ \
+	set -e ;\
+	CONTROLLER_GEN_TMP_DIR=$$(mktemp -d) ;\
+	cd $$CONTROLLER_GEN_TMP_DIR ;\
+	go mod init tmp ;\
+	go get sigs.k8s.io/controller-tools/cmd/controller-gen@v0.5.0 ;\
+	rm -rf $$CONTROLLER_GEN_TMP_DIR ;\
+	}
+endif
+	export CONTROLLER_GEN=$(shell which controller-gen)
