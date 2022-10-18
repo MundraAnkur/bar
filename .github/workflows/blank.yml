@@ -29,3 +29,4 @@ jobs:
           echo "GOPATH: ${GOPATH}"
           echo "GITHUB_ACTION_REPOSITORY: ${GITHUB_ACTION_REPOSITORY}"
           make generate
+          ls ${GOPATH}/bin/
