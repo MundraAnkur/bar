@@ -1,6 +1,6 @@
 GOBIN ?= ${GOPATH}/bin
 IMG   ?= tackle2-addon-windup:latest
-CONTAINER_RUNTIME := $(shell command -v podman 2> /dev/null || echo docker)
+CONTAINER_RUNTIME := docker
 build-image:
 	echo "Ankur building image $(IMG)";
 	
