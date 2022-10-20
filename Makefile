@@ -1,22 +1,33 @@
 GOBIN ?= ${GOPATH}/bin
-
-controller-gen:
-ifeq (, $(shell which controller-gen))
+IMG   ?= tackle2-addon-windup:latest
+CONTAINER_RUNTIME := $(shell command -v podman 2> /dev/null || echo docker)
+build-image:
+	echo "Ankur building image $(IMG)";
+	
+.PHONY: test-e2e
+START_MINIKUBE_SH = ./bin/start-minikube.sh
+INSTALL_TACKLE_SH = ./bin/install-tackle.sh
+start-minikube:
+ifeq (,$(wildcard $(START_MINIKUBE_SH)))
 	@{ \
 	set -e ;\
-	CONTROLLER_GEN_TMP_DIR=$$(mktemp -d) ;\
-	cd $$CONTROLLER_GEN_TMP_DIR ;\
-	go mod init tmp ;\
-	go install sigs.k8s.io/controller-tools/cmd/controller-gen@v0.5.0 ;\
-	rm -rf $$CONTROLLER_GEN_TMP_DIR ;\
+	mkdir -p $(dir $(START_MINIKUBE_SH)) ;\
+	curl -sSLo $(START_MINIKUBE_SH) https://raw.githubusercontent.com/konveyor/tackle2-operator/main/hack/start-minikube.sh ;\
+	chmod +x $(START_MINIKUBE_SH) ;\
 	}
-	export CONTROLLER_GEN=$(GOBIN)/controller-gen
-else
-	export CONTROLLER_GEN=$(shell which controller-gen)
 endif
+	$(START_MINIKUBE_SH);
+install-tackle:
+ifeq (,$(wildcard $(INSTALL_TACKLE_SH)))
+	@{ \
+	set -e ;\
+	mkdir -p $(dir $(INSTALL_TACKLE_SH)) ;\
+	curl -sSLo $(INSTALL_TACKLE_SH) https://raw.githubusercontent.com/konveyor/tackle2-operator/main/hack/install-tackle.sh ;\
+	chmod +x $(INSTALL_TACKLE_SH) ;\
+	}
+endif
+	$(INSTALL_TACKLE_SH);
 
-generate: controller-gen; \
-	echo "COntroller Gen: $(shell which controller-gen)";\
-	echo "Con: $(CONTROLLER_GEN)"; \
-	echo "Gen: ${CONTROLLER_GEN}";
-	  
+test-e2e: start-minikube build-image install-tackle; \
+	export HOST=http://$(shell minikube ip)/hub; \
+	bash hack/test-e2e.sh;
