@@ -10,11 +10,10 @@ jobs:
       - uses: actions/checkout@v3
       - name: start-minikube
         uses: konveyor/tackle2-operator/.github/actions/start-minikube@main
-      - name: port forward
-        run: kubectl port-forward service/tackle-ui 8080:8080 -n konveyor-tackle
+      
       - name: install-tackle
         uses: konveyor/tackle2-operator/.github/actions/install-tackle@main
-        with:
-          tackle-addon-windup-image: tackle2-addon-windup:latest
+      - name: port forward
+        run: kubectl port-forward service/tackle-ui 8080:8080 -n konveyor-tackle
       - name: Run End-to-End Test
         uses: mundra-ankur/tackle2-addon-windup/.github/actions/test-e2e-windup@main
