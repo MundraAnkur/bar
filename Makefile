@@ -29,5 +29,6 @@ endif
 	$(INSTALL_TACKLE_SH);
 
 test-e2e: start-minikube build-image install-tackle; \
-	export HOST=http://$(shell minikube ip)/hub; \
+	$(shell kubectl port-forward service/tackle-ui 8080:8080 -n konveyor-tackle &); \
+	export HOST=http://127.0.0.1:8080/hub; \
 	bash hack/test-e2e.sh;
