@@ -35,4 +35,5 @@ test-e2e: start-minikube build-image install-tackle; \
 
 .PHONY: test-e2e-without-env-setup
 test-e2e-without-env-setup: 
+	$(kubectl) port-forward service/tackle-ui 8080:8080 -n konveyor-tackle > /dev/null 2>&1 & ;\
 	bash hack/test-e2e.sh
