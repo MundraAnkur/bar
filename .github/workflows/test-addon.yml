@@ -4,9 +4,18 @@ on:
   workflow_dispatch:
   
 jobs:
-  test-e2e:
+  test-addons:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Run End-to-End Test
-        run: make test-e2e
+      - name: start-minikube
+        uses: konveyor/tackle2-operator/.github/actions/start-minikube@main
+     
+      - name: install-tackle
+        uses: konveyor/tackle2-operator/.github/actions/install-tackle@main
+        
+      - name: Port Forward
+        run: kubectl port-forward service/tackle-ui 8080:8080 -n konveyor-tackle &
+
+      - name: test windup addon
+        uses: mundra-ankur/tackle2-addon-windup/.github/actions/test-e2e-windup@main
