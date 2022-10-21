@@ -14,8 +14,8 @@ jobs:
       - name: install-tackle
         uses: konveyor/tackle2-operator/.github/actions/install-tackle@main
         
-      - name: Port Forward
-        run: kubectl port-forward service/tackle-ui 8080:8080 -n konveyor-tackle &
+#       - name: Port Forward
+#         run: kubectl port-forward service/tackle-ui 8080:8080 -n konveyor-tackle &
 
       - name: test windup addon
         run: make test-e2e-without-env-setup
