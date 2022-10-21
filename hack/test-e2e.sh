@@ -1,8 +1,7 @@
 #!/bin/bash
 
-host="${HOST:-localhost:8080}"
+host="${HOST:-localhost:8080/hub}"
 
-echo "$(kubectl wait deployment/tackle-hub --for condition=available --timeout=-1s -n konveyor-tackle)"
 
 # Create a Stake Holder Group
 curl -X POST ${host}/stakeholdergroups -d \
