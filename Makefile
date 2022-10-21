@@ -35,5 +35,5 @@ test-e2e: start-minikube build-image install-tackle; \
 
 .PHONY: test-e2e-without-env-setup
 test-e2e-without-env-setup: 
-	export HOST=http://127.0.0.1:8080/hub; \
+	export HOST=http://localhost:8080/hub; \
 	bash hack/test-e2e.sh;
