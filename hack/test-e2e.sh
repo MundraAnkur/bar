@@ -1,7 +1,24 @@
 #!/bin/bash
 
-host="${HOST:-localhost:8080/hub}"
+# Port Forwarding
+kubectl port-forward service/tackle-ui 8080:8080 -n konveyor-tackle > /dev/null 2>&1 &
 
+pid=$!
+echo pid: $pid
+
+# kill the port-forward regardless of how this script exits
+trap '{
+    echo killing $pid
+    kill $pid
+}' EXIT
+
+# wait for $localport to become available
+while ! nc -vz localhost 8080 > /dev/null 2>&1 ; do
+    echo sleeping
+    sleep 0.1
+done
+
+host="${HOST:-localhost:8080/hub}"
 
 # Create a Stake Holder Group
 curl -X POST ${host}/stakeholdergroups -d \
